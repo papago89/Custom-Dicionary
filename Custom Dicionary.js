@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Custom Dictionary(自製字典庫)
 // @namespace    http://tampermonkey.net/
+// @description  Custom Dictionary(自製字典庫)：設定自己的字典庫，可在任意網頁幫助查找，貼上。
 // @version      0.1
-// @description  try to take over the world!
 // @author       papago89
 // @match        https://*/*
 // @match        http://*/*
@@ -13,6 +13,7 @@
 // @grant        GM_xmlhttpRequest
 // @require      https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js
 // @include      @
+// @license MIT
 // ==/UserScript==
 
 let dictionaryJSON = {
@@ -113,7 +114,6 @@ let matchKeyData = {};
     GM_addStyle("td.dicionary {padding:5px;background:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}");
     GM_addStyle("td.active,th.active {border:1px solid blue;font-weight:bold;color:yellow;background:rgba(255,10,20,0.5);}");
     GM_addStyle("td.dicionary:hover {white-space:normal;overflow:auto}");
-    init();
 
     $(document).keyup(e => {
         if (17 == e.keyCode) {
@@ -215,6 +215,7 @@ function generateOverlayWhenNotExists() {
     if (null != $('#dictionaryOverlay')[0]) {
         return;
     }
+    init();
     let top = (window.screen.height / 2) - 425;
     let left = (window.screen.width / 2) - 540;
     $('body').append(
@@ -241,7 +242,7 @@ function generateOverlayWhenNotExists() {
 
     });
 
-    $('#dictionarySearchKey').keyup(e => {
+    $('#dictionarySearchKey').on('input propertychange', e => {
         if (13 == e.keyCode) {
             undisplayOverlay();
             let activeValue = $('#dictionaryData tr td.value.active')[0];
@@ -344,6 +345,7 @@ function generateTableByMatchKeyData() {
         let decodedValue = decodeURI(activeValue.dataset.value);
         if (e.button == 0 && e.ctrlKey) {
             $('#dictionarySearchKey')[0].value = decodedValue;
+            $('#dictionarySearchKey')[0].focus();
             searchKeyChangeTrigger(decodedValue);
         } else if (e.button == 0) {
             undisplayOverlay();
