@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Custom Dicionary(自製字典庫)
+// @name         Custom Dictionary(自製字典庫)
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -19,21 +19,34 @@ let dictionaryJSON = {
     "fav1": {
         "name": "favorite-1",
         "data": [
-            { "value": "Tssss", "description": "xxxx" },
-            { "value": "blablabla" }
+            {
+                "value": "Tssss",
+                "description": "xxxx"
+            },
+            {
+                "value": "blablabla"
+            }
         ]
     },
     "fav2": {
         "name": "favorite-2",
         "data": [
-            { "value": "zzzz", "description": "blablabla" }
+            {
+                "value": "zzzz",
+                "description": "blablabla"
+            }
         ]
     },
     "fav4": {
         "name": "favorite-4",
         "data": [
-            { "value": "blablabla" },
-            { "value": "blablabla\n            \n            blablabla", "description": "blablabla" },
+            {
+                "value": "blablabla"
+            },
+            {
+                "value": "blablabla\n            \n            blablabla",
+                "description": "blablabla"
+            }
         ]
     },
     "test-json2": {
@@ -231,7 +244,11 @@ function debounce(func, delay) {
  * 根據 searchKey 的變更重新處理相關作業
  */
 function searchKeyChangeTrigger(searchKey) {
-    searchKey = searchKey.replace(/\.\(\)\{\}\[\]\*\\\+/g, '.');
+    if (null != searchKey.match(/^\/(.*)\//)) {
+        searchKey = searchKey.match(/^\/(.*)\//)[1];
+    } else {
+        searchKey = searchKey.replace(/\.\(\)\{\}\[\]\*\\\+/g, '.');
+    }
     filterData(new RegExp('.*' + searchKey + '.*'));
     generateTableByMatchKeyData();
 }
@@ -263,7 +280,7 @@ function generateTableByMatchKeyData() {
 
     let activeKey = Object.keys(matchKeyData)[xActive];
 
-    if (yActive > matchKeyData[activeKey].data.length) {
+    if (yActive > matchKeyData[activeKey]?.data?.length) {
         yActive = 0;
     }
 
@@ -276,8 +293,8 @@ function generateTableByMatchKeyData() {
 
     let dataHTML = '<table id="dictionaryData" class="dicionary" style="width:100%;"><tbody>';
 
-    for (let i in matchKeyData[activeKey].data) {
-        let data = matchKeyData[activeKey].data[i];
+    for (let i in matchKeyData[activeKey]?.data) {
+        let data = matchKeyData[activeKey]?.data[i];
         dataHTML += `<tr data-x-position="${xActive}" data-y-position="${i}"><td class="value" data-value="${encodeURI(data.value)}" style="width:70%;">${data.value}</td><td style="width:30%;">${null != data.description ? data.description : ''}</td></tr>`;
     }
     dataHTML += '</tbody></table>';
