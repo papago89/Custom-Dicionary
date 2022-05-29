@@ -16,41 +16,72 @@
 // ==/UserScript==
 
 let dictionaryJSON = {
-    "fav1": {
-        "name": "favorite-1",
+    "ControlKeyPage1": {
+        "name": "Control key Page 1",
         "data": [
             {
-                "value": "Tssss",
-                "description": "xxxx"
+                "value": "CTRL + ↓",
+                "description": "will select next row"
             },
             {
-                "value": "blablabla"
+                "value": "CTRL + ↑",
+                "description": "will select previous row"
+            },
+            {
+                "value": "CTRL + →",
+                "description": "will select next category"
+            },
+            {
+                "value": "CTRL + your mouse primary button(通常是左鍵)",
+                "description": "will show now selected row value to search bar"
+            },
+            {
+                "value": "enter",
+                "description": "will paste now selected row value to your browser focus element"
             }
         ]
     },
-    "fav2": {
-        "name": "favorite-2",
+    "ControlKeyPage2": {
+        "name": "Control key Page 2",
         "data": [
             {
-                "value": "zzzz",
-                "description": "blablabla"
+                "value": "CTRL + ←",
+                "description": "will select previous category"
             }
         ]
     },
-    "fav4": {
-        "name": "favorite-4",
+    "record-2": {
+        "name": "test-2",
         "data": [
             {
-                "value": "blablabla"
+                "value": "this is test-1 value",
+                "description": "simple description"
             },
+            {
+                "value": "this is test-2 value, don't set the description"
+            }
+        ]
+    },
+    "record-3": {
+        "name": "test-3",
+        "data": [
+            {
+                "value": "127.0.0.1",
+                "description": "just test regexp find IP"
+            }
+        ]
+    },
+    "record-4": {
+        "name": "test-4",
+        "data": [
             {
                 "value": "blablabla\n            \n            blablabla",
-                "description": "blablabla"
+                "description": "data can put newline."
             }
         ]
     },
-    "test-json2": {
-        "name": "test-json2",
+    "record-5": {
+        "name": "this data from website json file",
         "url": "https://cdn.jsdelivr.net/gh/papago89/temp/fav-json"
     }
 };
