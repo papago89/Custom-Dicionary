@@ -278,7 +278,7 @@ function searchKeyChangeTrigger(searchKey) {
     if (null != searchKey.match(/^\/(.*)\//)) {
         searchKey = searchKey.match(/^\/(.*)\//)[1];
     } else {
-        searchKey = searchKey.replace(/\.\(\)\{\}\[\]\*\\\+/g, '.');
+        searchKey = searchKey.replace(/([.(){}\[\]*+\\])/g, '\\$1')
     }
     filterData(new RegExp('.*' + searchKey + '.*'));
     generateTableByMatchKeyData();
