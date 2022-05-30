@@ -249,7 +249,7 @@ function generateOverlayWhenNotExists() {
 
     });
 
-    $('#dictionarySearchKey').on('input propertychange', e => {
+    $('#dictionarySearchKey').on('input propertychange keyup', e => {
         if (13 == e.keyCode) {
             undisplayOverlay();
             let activeValue = $('#dictionaryData tr td.value.active')[0];
