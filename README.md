@@ -15,7 +15,7 @@
 5. `CTRL Mouse Primary Button`:will show now selected row value to search bar
 6. `Primary Button`:will paste now selected row value to your browser focus element
 
-![Demo keyboard shortcut.gif](https://raw.githubusercontent.com/papago89/Custom-Dicionary/main/Demo%20keyboard%20shortcut.gif))](https://raw.githubusercontent.com/papago89/Custom-Dicionary/main/Demo%20keyboard%20shortcut.gif)
+![Demo keyboard shortcut.gif](https://raw.githubusercontent.com/papago89/Custom-Dicionary/main/Demo%20keyboard%20shortcut.gif)
 
 ## Search use static string
 
