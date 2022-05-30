@@ -17,73 +17,34 @@
 // ==/UserScript==
 
 let dictionaryJSON = {
-    "ControlKeyPage1": {
-        "name": "Control key Page 1",
+    "OA-Reply pattern": {
+        "name": "OA 制式化回覆內容",
         "data": [
             {
-                "value": "CTRL + ↓",
-                "description": "will select next row"
+                "value": "一. 資料庫平台: Oracle\n二. 變更環境: PROD\n三. Stage環境: 無\n四. 系統/業務名稱: EDLS\n五. 主機名稱: oradb-edlsp.esunbank.com.tw\n六. IP: 10.230.204.40-42\n七. Port: 4031\n八. 資料庫名稱: EDLSP\n九. Schema: EDLS\n十. 執行時機: 隨時\n十一. 變更類別: 更新資料\n十二. 變更內容:\n　1. ",
+                "description": "EDLS DB 變更"
             },
             {
-                "value": "CTRL + ↑",
-                "description": "will select previous row"
-            },
-            {
-                "value": "CTRL + →",
-                "description": "will select next category"
-            },
-            {
-                "value": "CTRL + your mouse primary button(通常是左鍵)",
-                "description": "will show now selected row value to search bar"
-            },
-            {
-                "value": "enter",
-                "description": "will paste now selected row value to your browser focus element"
+                "value": "因應業管開立需求，擬進行人工批次作業(EDLS 營運帳務沖轉 HAC5 產出)\n\n1.請 SP 將檔案(20220523_REVERSE_T504_0749140085515_HAC5.txt)放置到 10.230.202.64 的 /edls/tempdata/deposit/K07/ 路徑下並給予 CTMBatchUser 750 的權限\n2.請 SP 將檔案(20220523_REVERSE_T504_0749140085515_HAC5.txt)放置到 10.230.202.65 的 /edls/tempdata/deposit/K07/ 路徑下並給予 CTMBatchUser 750 的權限\n3.請 SP 將檔案(20220523-0749140085515-DpK07Ot000201B01.sh)放置到 10.230.202.51 的 /home/CTMBatchUser/ 路徑下並給予 CTMBatchUser 755 的權限\n4.請 SP 切換使用者 CTMBatchUser 並切換到 10.230.202.51 的 /home/CTMBatchUser/ 路徑下\n5.請 SP 執行 sh 20220523-0749140085515-DpK07Ot000201B01.sh 並告知執行結果\n6.執行完畢後請將相關檔案自 VM 刪除(1~3 步驟的檔案：20220523_REVERSE_T504_0749140085515_HAC5.txt、20220523-0749140085515-DpK07Ot000201B01.sh)",
+                "description": "HAC5 跑批"
             }
         ]
     },
-    "ControlKeyPage2": {
-        "name": "Control key Page 2",
-        "data": [
-            {
-                "value": "CTRL + ←",
-                "description": "will select previous category"
-            }
-        ]
+    "TS0108-Document": {
+        "name": "TS0108-Document",
+        "url": "https://eip.esunbank.com.tw/sites/C105/DocLib57/F00-中心共用區/Confluence/EDLS/系統分析/共用設定/TS0108-Document"
     },
-    "record-2": {
-        "name": "test-2",
-        "data": [
-            {
-                "value": "this is test-1 value",
-                "description": "simple description"
-            },
-            {
-                "value": "this is test-2 value, don't set the description"
-            }
-        ]
+    "TS0108-DB Object": {
+        "name": "TS0108-DB Object",
+        "url": "https://eip.esunbank.com.tw/sites/C105/DocLib57/F00-中心共用區/Confluence/EDLS/系統分析/共用設定/TS0108-DB Object"
     },
-    "record-3": {
-        "name": "test-3",
-        "data": [
-            {
-                "value": "127.0.0.1",
-                "description": "just test regexp find IP"
-            }
-        ]
+    "TS0110-Document": {
+        "name": "TS0110-Document",
+        "url": "https://eip.esunbank.com.tw/sites/C105/DocLib57/F00-中心共用區/Confluence/EDLS/系統分析/共用設定/TS0110-Document"
     },
-    "record-4": {
-        "name": "test-4",
-        "data": [
-            {
-                "value": "blablabla\n            \n            blablabla",
-                "description": "data can put newline."
-            }
-        ]
-    },
-    "record-5": {
-        "name": "this data from website json file",
-        "url": "https://cdn.jsdelivr.net/gh/papago89/temp/fav-json"
+    "TS0110-DB Object": {
+        "name": "TS0110-DB Object",
+        "url": "https://eip.esunbank.com.tw/sites/C105/DocLib57/F00-中心共用區/Confluence/EDLS/系統分析/共用設定/TS0110-DB Object"
     }
 };
 
@@ -198,7 +159,7 @@ function startSetting() {
         '  </div>'
     );
     let gmValue = GM_getValue('dictionaryJSON');
-    console.log(gmValue);
+
     if (null == gmValue) {
         gmValue = dictionaryJSON;
     }
@@ -299,8 +260,8 @@ function filterData(regexp) {
     let temp = {};
     for (let key of Object.keys(dictionaryJSON)) {
         let tempCategory = Object.assign({}, dictionaryJSON[key]);
-        tempCategory.data = tempCategory.data.filter(data => null != data.value.match(regexp) || null != data?.description?.match(regexp));
-        if (tempCategory.data.length > 0) {
+        tempCategory.data = tempCategory?.data?.filter(data => null != data.value.match(regexp) || null != data?.description?.match(regexp));
+        if (tempCategory?.data?.length > 0) {
             temp[key] = tempCategory;
         }
     }
