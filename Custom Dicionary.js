@@ -197,7 +197,14 @@ function startSetting() {
         '    <textarea id="dictionarySettingContent" style="top:40px; width: 680px; height: 510px; overflow-y: scroll; z - index: 9999; background: rgba(0, 171, 164, 0.5); color: #ffffff;"></textarea>\n' +
         '  </div>'
     );
-    $('#dictionarySettingContent')[0].value = JSON.stringify(GM_getValue('dictionaryJSON'));
+    let gmValue = GM_getValue('dictionaryJSON');
+    console.log(gmValue);
+    if (null == gmValue) {
+        gmValue = dictionaryJSON;
+    }
+
+    $('#dictionarySettingContent')[0].value = JSON.stringify(gmValue);
+
     $('#saveThenCloseBtton').click(saveThenClose);
 }
 
