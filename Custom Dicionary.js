@@ -110,10 +110,10 @@ let matchKeyData = {};
     'use strict';
     GM_addStyle("table.dicionary {background:inherit;table-layout:fixed;overflow:hidden;}}");
     GM_addStyle("tbody.dicionary,thead.dicionary,tr.dicionary {background:inherit;overflow:hidden;}");
-    GM_addStyle("th.dicionary {padding:5px;text-align:center;background:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}");
-    GM_addStyle("td.dicionary {padding:5px;background:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}");
-    GM_addStyle("td.active,th.active {border:1px solid blue;font-weight:bold;color:yellow;background:rgba(255,10,20,0.5);}");
-    GM_addStyle("td.dicionary:hover {white-space:normal;overflow:auto}");
+    GM_addStyle("table.dicionary th {padding:5px;text-align:center;background:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}");
+    GM_addStyle("table.dicionary td {padding:5px;background:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}");
+    GM_addStyle("table.dicionary td.active,table.dicionary th.active {border:1px solid blue;font-weight:bold;color:yellow;background:rgba(255,10,20,0.5);}");
+    GM_addStyle("table.dicionary td:hover {white-space:normal;overflow:auto}");
 
     $(document).keyup(e => {
         if (17 == e.keyCode) {
